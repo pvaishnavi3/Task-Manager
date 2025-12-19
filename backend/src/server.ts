@@ -34,13 +34,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Request logging in development
-if (process.env.NODE_ENV === 'development') {
-    app.get("/", (_req, res) => {
-        res.json({ message: "Server is running", status: "ok" });
+// Root health check (works in all environments)
+app.get("/", (_req, res) => {
+    res.json({
+        message: "Task Manager API is running",
+        status: "ok",
+        environment: process.env.NODE_ENV || 'development'
     });
-}
-
+});
 
 // API Routes
 app.use('/api', routes);
