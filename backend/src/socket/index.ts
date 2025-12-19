@@ -1,10 +1,31 @@
 import { Server, Socket } from 'socket.io';
 import { notificationService } from '../services/notification.service';
 
+let io: Server;
+
+/**
+ * Initialize the Socket.io server instance
+ */
+export const initializeIO = (socketServer: Server) => {
+    io = socketServer;
+};
+
+/**
+ * Get the Socket.io server instance
+ */
+export const getIO = (): Server => {
+    if (!io) {
+        throw new Error('Socket.io not initialized');
+    }
+    return io;
+};
+
 /**
  * Socket.io handler for real-time task updates and notifications
  */
-export const setupSocketHandlers = (io: Server) => {
+export const setupSocketHandlers = (ioServer: Server) => {
+    io = ioServer;
+
     io.on('connection', (socket: Socket) => {
         console.log('Client connected:', socket.id);
 

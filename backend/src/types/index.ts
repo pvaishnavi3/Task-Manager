@@ -1,16 +1,7 @@
-export enum Priority {
-    LOW = 'LOW',
-    MEDIUM = 'MEDIUM',
-    HIGH = 'HIGH',
-    URGENT = 'URGENT'
-}
+import { Priority, Status } from '@prisma/client';
 
-export enum Status {
-    TODO = 'TODO',
-    IN_PROGRESS = 'IN_PROGRESS',
-    REVIEW = 'REVIEW',
-    COMPLETED = 'COMPLETED'
-}
+// Re-export Prisma enums for convenience
+export { Priority, Status };
 
 export interface IUser {
     id: string;

@@ -3,13 +3,16 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 import routes from './routes';
 import { errorHandler, notFoundHandler } from './middleware/error.middleware';
 import { setupSocketHandlers } from './socket';
 
 // Load environment variables
-dotenv.config();
+if (process.env.NODE_ENV !== 'production') {
+    const dotenv = require('dotenv');
+    dotenv.config();
+}
 
 const app = express();
 const httpServer = createServer(app);
