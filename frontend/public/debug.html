@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug React</title>
+</head>
+
+<body>
+    <h1>React Debug Page</h1>
+    <div id="root"></div>
+    <div id="debug-info">
+        <h2>Debug Information:</h2>
+        <p id="status">Loading...</p>
+    </div>
+
+    <script type="module">
+        const debugEl = document.getElementById('status');
+
+        try {
+            debugEl.textContent = 'Step 1: Script loaded';
+
+            // Try to import React
+            import('react').then(React => {
+                debugEl.textContent = 'Step 2: React imported successfully! Version: ' + React.version;
+
+                // Try to import ReactDOM
+                import('react-dom/client').then(ReactDOM => {
+                    debugEl.textContent += '\\nStep 3: ReactDOM imported successfully!';
+
+                    // Try to import App
+                    import('./src/App.tsx').then(AppModule => {
+                        debugEl.textContent += '\\nStep 4: App.tsx imported successfully!';
+                    }).catch(err => {
+                        debugEl.textContent += '\\nStep 4 ERROR importing App.tsx: ' + err.message;
+                        console.error('App import error:', err);
+                    });
+                }).catch(err => {
+                    debugEl.textContent += '\\nStep 3 ERROR importing ReactDOM: ' + err.message;
+                    console.error('ReactDOM import error:', err);
+                });
+            }).catch(err => {
+                debugEl.textContent = 'Step 2 ERROR importing React: ' + err.message;
+                console.error('React import error:', err);
+            });
+        } catch (err) {
+            debugEl.textContent = 'ERROR in script: ' + err.message;
+            console.error('Script error:', err);
+        }
+    </script>
+</body>
+
+</html>
