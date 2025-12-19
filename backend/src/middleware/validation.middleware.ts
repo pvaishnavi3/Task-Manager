@@ -9,7 +9,7 @@ export const validate = (schema: ZodSchema, source: 'body' | 'query' | 'params' 
         try {
             const data = req[source];
             schema.parse(data);
-            next();
+            return next();
         } catch (error) {
             if (error instanceof ZodError) {
                 const errors = error.errors.map(err => ({
@@ -21,7 +21,7 @@ export const validate = (schema: ZodSchema, source: 'body' | 'query' | 'params' 
                     details: errors
                 });
             }
-            next(error);
+            return next(error);
         }
     };
 };

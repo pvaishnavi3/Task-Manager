@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 /**
  * Global error handling middleware
  */
-export const errorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
+export const errorHandler = (err: Error, _req: Request, res: Response, _next: NextFunction) => {
     console.error('Error:', err);
 
     // Handle known errors
@@ -32,7 +32,7 @@ export const errorHandler = (err: Error, req: Request, res: Response, next: Next
     }
 
     // Default error
-    res.status(500).json({
+    return res.status(500).json({
         error: 'Internal server error',
         message: process.env.NODE_ENV === 'development' ? err.message : undefined
     });
@@ -41,6 +41,6 @@ export const errorHandler = (err: Error, req: Request, res: Response, next: Next
 /**
  * 404 Not Found handler
  */
-export const notFoundHandler = (req: Request, res: Response) => {
+export const notFoundHandler = (_req: Request, res: Response) => {
     res.status(404).json({ error: 'Route not found' });
 };

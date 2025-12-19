@@ -13,7 +13,7 @@ router.use('/tasks', taskRoutes);
 router.use('/notifications', notificationRoutes);
 
 // Health check endpoint
-router.get('/health', (req, res) => {
+router.get('/health', (_req, res) => {
     res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 

@@ -95,7 +95,7 @@ export class AuthController {
      * Logout user
      * POST /api/auth/logout
      */
-    async logout(req: Request, res: Response) {
+    async logout(_req: Request, res: Response) {
         res.clearCookie('token');
         res.status(200).json({ message: 'Logout successful' });
     }
@@ -104,7 +104,7 @@ export class AuthController {
      * Get all users (for task assignment)
      * GET /api/auth/users
      */
-    async getAllUsers(req: Request, res: Response, next: NextFunction) {
+    async getAllUsers(_req: Request, res: Response, next: NextFunction) {
         try {
             const users = await authService.getAllUsers();
             res.status(200).json({ users });

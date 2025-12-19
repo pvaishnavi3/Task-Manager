@@ -1,3 +1,4 @@
+import { Request } from 'express';
 import { Priority, Status } from '@prisma/client';
 
 // Re-export Prisma enums for convenience
@@ -7,6 +8,7 @@ export interface IUser {
     id: string;
     email: string;
     name: string;
+    password: string;
     createdAt: Date;
     updatedAt: Date;
 }

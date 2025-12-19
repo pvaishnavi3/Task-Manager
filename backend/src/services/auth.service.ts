@@ -120,7 +120,7 @@ export class AuthService {
      * Generate JWT token
      */
     private generateToken(payload: JWTPayload): string {
-        return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
+        return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN } as jwt.SignOptions);
     }
 
     /**
