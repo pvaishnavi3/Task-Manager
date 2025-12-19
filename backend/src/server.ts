@@ -36,10 +36,11 @@ app.use(cookieParser());
 
 // Request logging in development
 if (process.env.NODE_ENV === 'development') {
-    app.use((req, res, next) => {
-        console.log(`${req.method} ${req.path}`);
-        next();
+    app.get("/", (_req, _res) => {
+        console.log("Server is running");
     });
+
+
 }
 
 // API Routes
