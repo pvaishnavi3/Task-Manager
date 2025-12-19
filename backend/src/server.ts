@@ -20,14 +20,20 @@ const httpServer = createServer(app);
 // Socket.io setup
 const io = new Server(httpServer, {
     cors: {
-        origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+        origin: [
+            process.env.FRONTEND_URL || 'http://localhost:5173',
+            'https://task-manager-frontend-5pkh.onrender.com'
+        ],
         credentials: true
     }
 });
 
 // Middleware
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    origin: [
+        process.env.FRONTEND_URL || 'http://localhost:5173',
+        'https://task-manager-frontend-5pkh.onrender.com'
+    ],
     credentials: true
 }));
 app.use(express.json());
